@@ -1,0 +1,50 @@
+- name: apt update
+  sudo: yes
+  apt: update_cache=yes cache_valid_time=3600 
+  
+- name: install basic tools
+  sudo: yes
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - vim
+    - nano
+    - tree
+    - htop
+    - git
+    - build-essential
+    - ufw
+
+- name: install python packages
+  sudo: yes
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - python-dev
+    - python-setuptools
+    - python-virtualenv
+
+- name: allow ssh
+  sudo: yes
+  ufw: proto=tcp port=22 rule=allow
+
+- name: set firewall default policy
+  sudo: yes
+  ufw: state=enabled policy=reject
+
+- name: set locale
+  sudo: yes
+  command: /usr/sbin/update-locale LANG={{ locale }} LC_ALL=$locale
+
+- name: set /etc/localtime
+  sudo: yes
+  copy: src=/usr/share/zoneinfo/{{ timezone }} 
+        dest=/etc/localtime 
+        owner=root
+        group=root
+        mode=0644
+        backup=true
+
+- name: set /etc/timezone
+  sudo: yes
+  template: src=timezone.j2 dest=/etc/timezone
+  notify: update tzdata
+
