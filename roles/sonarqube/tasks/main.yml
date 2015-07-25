@@ -24,7 +24,7 @@
   sudo: yes
   ufw: >
     proto=tcp
-    port=9000
+    port={{ sonar_web_port }}
     rule=allow
 
 - name: configure sonar

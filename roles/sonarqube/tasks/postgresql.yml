@@ -11,7 +11,7 @@
   sudo: yes
   sudo_user: postgres
   postgresql_db: >
-    name=sonar
+    name={{ sonar_db_name }}
     encoding='UTF-8'
     lc_collate='en_US.UTF-8'
     lc_ctype='en_US.UTF-8'
@@ -20,9 +20,9 @@
   sudo: yes
   sudo_user: postgres
   postgresql_user: >
-    name=sonar
-    password=sonar
-    db=sonar
+    name={{ sonar_db_user }}
+    password={{ sonar_db_password }}
+    db={{ sonar_db_name }}
     role_attr_flags=CREATEDB,NOSUPERUSER
     priv=ALL
 

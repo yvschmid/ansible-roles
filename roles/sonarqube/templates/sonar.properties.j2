@@ -1,7 +1,7 @@
-sonar.jdbc.username=sonar
-sonar.jdbc.password=sonar
-sonar.jdbc.url=jdbc:postgresql://localhost/sonar
-sonar.web.host=0.0.0.0
-sonar.web.contect=
-sonar.web.port=9000
+sonar.jdbc.username={{ sonar_db_user }}
+sonar.jdbc.password={{ sonar_db_password }}
+sonar.jdbc.url=jdbc:postgresql://localhost/{{ sonar_db_name }}
+sonar.web.host={{ sonar_web_host }}
+sonar.web.context={{ sonar_web_context }}
+sonar.web.port={{ sonar_web_port }}
 
