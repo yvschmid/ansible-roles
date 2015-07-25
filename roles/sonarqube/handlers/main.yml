@@ -1,0 +1,11 @@
+- name: restart postgresql
+  sudo: yes
+  service: >
+    name=postgresql
+    state=restarted
+
+- name: restart sonar
+  sudo: yes
+  service: >
+    name=sonar
+    state=restarted

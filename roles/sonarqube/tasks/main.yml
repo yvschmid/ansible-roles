@@ -1,0 +1,37 @@
+- include: postgresql.yml
+
+- name: install java
+  sudo: yes
+  apt: >
+    pkg=default-jdk
+    state=latest
+
+- name: add sonarqube repository
+  sudo: yes
+  apt_repository: >
+    repo='deb http://downloads.sourceforge.net/project/sonar-pkg/deb binary/'
+    state=present
+
+- name: install sonarqube
+  sudo: yes
+  apt: >
+    pkg=sonar
+    state=latest
+    update_cache=true
+    force=yes
+
+- name: allow connection to sonarqube server
+  sudo: yes
+  ufw: >
+    proto=tcp
+    port=9000
+    rule=allow
+
+- name: configure sonar
+  sudo: yes
+  template: >
+    src=sonar.properties.j2
+    dest=/opt/sonar/conf/sonar.properties
+    force=yes
+  notify:
+    - restart sonar
