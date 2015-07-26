@@ -26,7 +26,7 @@
     role_attr_flags=CREATEDB,NOSUPERUSER
     priv=ALL
 
-- name: add pg_hba.conf
+- name: change pg_hba.conf
   sudo: yes
   template: >
     src=pg_hba.conf.j2
@@ -34,4 +34,18 @@
     force=yes
   notify:
     - restart postgresql
+
+- name: change postgresql.conf
+  sudo: yes
+  template: >
+    src=postgresql.conf.j2
+    dest=/etc/postgresql/9.3/main/postgresql.conf
+    force=yes
+
+- name: allow remote connection
+  sudo: yes
+  ufw: >
+    proto=tcp
+    port={{ postgresql_port }}
+    rule=allow
 

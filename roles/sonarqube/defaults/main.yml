@@ -6,3 +6,15 @@ sonar_db_name : "sonar"
 sonar_db_user : "sonar"
 sonar_db_password : "sonar"
 
+sonar_plugins :
+  - name : "Python Support"
+    url  : "http://dist.sonarsource.com/oss/org/codehaus/sonar-plugins/python/sonar-python-plugin/1.5/sonar-python-plugin-1.5.jar"
+
+  - name : "C# Support"
+    url  : "https://sonarsource.bintray.com/Distribution/sonar-csharp-plugin/sonar-csharp-plugin-4.1.jar"
+
+  - name : "Resharper"
+    url  : "https://sonarsource.bintray.com/Distribution/sonar-resharper-plugin-2.0.jar"
+
+postgresql_listen_addresses : "*"
+postgresql_port : "5432"
